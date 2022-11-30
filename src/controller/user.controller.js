@@ -8,7 +8,7 @@ const createUser = async (req, res) => {
   try {
     const { displayName, email, password, image } = req.body;
 
-    const userCreated = await userService.createUser(displayName, email, password, image);
+    const userCreated = await userService.createUser({ displayName, email, password, image });
     console.log('>>>>>>>>>>>>', userCreated.null);
 
     const jwtConfig = {
