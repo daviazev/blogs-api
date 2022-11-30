@@ -14,8 +14,6 @@ const validateJWT = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, secret);
 
-    console.log('>>>>>>>>>>>>', decoded);
-
     const user = await userService.getUserById(decoded.data.userId);
 
     // if (!user) return res.status(401).json({ message: 'Erro ao procurar usuário' });

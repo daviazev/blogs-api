@@ -14,4 +14,6 @@ router.post('/', doesEmailAlreadyExists, createUserValidation, userController.cr
 
 router.get('/', validateJWT, userController.controllerGetAllusers);
 
+router.get('/:id', validateJWT, userController.controllerGetUserById);
+
 module.exports = router;

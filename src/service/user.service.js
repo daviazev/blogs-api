@@ -7,7 +7,9 @@ const createUser = async ({ displayName, email, password, image }) => {
 };
 
 const getUserById = async (id) => {
-  const result = await User.findByPk(id);
+  const result = await User.findByPk(id, {
+    attributes: { exclude: 'password' },
+  });
 
   return result;
 };
