@@ -24,6 +24,16 @@ const createUser = async (req, res) => {
   }
 };
 
+const controllerGetAllusers = async (_req, res) => {
+  try {
+    const allUsers = await userService.getAllUsers();
+    return res.status(200).json(allUsers);
+  } catch (error) {
+    return res.status(500).json({ message: 'erro', erro: error.message });
+  }
+}; 
+
 module.exports = {
   createUser,
+  controllerGetAllusers,
 };
