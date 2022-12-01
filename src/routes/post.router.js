@@ -14,4 +14,6 @@ router.post('/', validateJWT, verifyPostFields, allCategoriesExists, postControl
 
 router.get('/', validateJWT, postController.controllerGetAllPosts);
 
+router.get('/:id', validateJWT, postController.getPostInfosById);
+
 module.exports = router;

@@ -23,4 +23,17 @@ const controllerGetAllPosts = async (_req, res) => {
   }
 };
 
-module.exports = { controllerPost, controllerGetAllPosts };
+const getPostInfosById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await postService.getPostInfosById(id);
+
+    if (result === null) return res.status(404).json({ message: 'Post does not exist' });
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro interno' });
+  }
+};
+
+module.exports = { controllerPost, controllerGetAllPosts, getPostInfosById };
