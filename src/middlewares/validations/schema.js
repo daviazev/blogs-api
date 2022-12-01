@@ -11,7 +11,12 @@ const createUserValidation = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
+const createCategoryValidation = Joi.object({
+  name: Joi.string().required(),
+});
+
 module.exports = {
   loginFieldsValidation,
   createUserValidation,
+  createCategoryValidation,
 };
