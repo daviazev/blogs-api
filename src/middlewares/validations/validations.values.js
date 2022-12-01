@@ -2,6 +2,7 @@ const {
   loginFieldsValidation, 
   createUserValidation, 
   createCategoryValidation,
+  postValidation,
 } = require('./schema');
 
 const validateLoginField = (email, password) => {
@@ -29,8 +30,17 @@ const validateCreateCategory = (name) => {
   return { type: null, messsage: '' };
 };
 
+const validatePost = (title, content, categoryIds) => {
+  const { error } = postValidation.validate({ title, content, categoryIds });
+
+  if (error) return { type: error.message, message: error.message };
+
+  return { type: null, messsage: '' };
+};
+
 module.exports = {
   validateLoginField,
   validateCreateUser,
   validateCreateCategory,
+  validatePost,
 };

@@ -12,7 +12,18 @@ const getAllCategories = async () => {
   return result;
 };
 
+const doesCategoryExists = async (arrayOfIds) => {
+  const result = await Promise.all(arrayOfIds.map(async (category) => {
+    const xablau = await Category.findByPk(category);
+
+    return xablau;
+  }));
+
+  return result;
+};
+
 module.exports = {
   createCategory,
   getAllCategories,
+  doesCategoryExists,
 };
