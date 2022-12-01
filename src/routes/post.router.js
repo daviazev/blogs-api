@@ -12,4 +12,6 @@ router.use(express.json());
 
 router.post('/', validateJWT, verifyPostFields, allCategoriesExists, postController.controllerPost);
 
+router.get('/', validateJWT, postController.controllerGetAllPosts);
+
 module.exports = router;
