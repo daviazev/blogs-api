@@ -12,4 +12,6 @@ router.use(express.json());
 
 router.post('/', validateJWT, nameFieldValidation, categoryController.controllerCreateCategory);
 
+router.get('/', validateJWT, categoryController.controllerGetAllCategories);
+
 module.exports = router;
