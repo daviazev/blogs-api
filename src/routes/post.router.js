@@ -4,6 +4,8 @@ const { validateJWT } = require('../middlewares/validateJWT');
 
 const { allCategoriesExists, verifyPostFields } = require('../middlewares/category.middleware');
 
+const { validateUpdate } = require('../middlewares/post.middleware');
+
 const postController = require('../controller/post.controller');
 
 const router = express.Router();
@@ -15,5 +17,7 @@ router.post('/', validateJWT, verifyPostFields, allCategoriesExists, postControl
 router.get('/', validateJWT, postController.controllerGetAllPosts);
 
 router.get('/:id', validateJWT, postController.getPostInfosById);
+
+router.put('/:id', validateJWT, validateUpdate, postController.controllerUpdatePost);
 
 module.exports = router;

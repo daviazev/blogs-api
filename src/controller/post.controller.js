@@ -36,4 +36,24 @@ const getPostInfosById = async (req, res) => {
   }
 };
 
-module.exports = { controllerPost, controllerGetAllPosts, getPostInfosById };
+const controllerUpdatePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    const { dataValues } = req.user;
+
+    const result = await postService.updatePostById(id, title, content, dataValues.id);
+
+    if (result === null) return res.status(404).json({ message: 'post not found' });
+
+    if (result === 'Unauthorized user') {
+      return res.status(401).json({ message: 'Unauthorized user' });
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(200).json({ message: 'Erro interno', erro: error.message });
+  }
+};
+
+module.exports = { controllerPost, controllerGetAllPosts, getPostInfosById, controllerUpdatePost };

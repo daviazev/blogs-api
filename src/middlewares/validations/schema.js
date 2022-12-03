@@ -21,9 +21,15 @@ const postValidation = Joi.object({
   categoryIds: Joi.array().required(),
 });
 
+const postUpdateValidation = Joi.object({
+  title: Joi.string().required(),
+  content: Joi.string().required(),
+});
+
 module.exports = {
   loginFieldsValidation,
   createUserValidation,
   createCategoryValidation,
   postValidation,
+  postUpdateValidation,
 };

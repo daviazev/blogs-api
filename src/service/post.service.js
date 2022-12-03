@@ -60,4 +60,18 @@ const getPostInfosById = async (id) => {
   return result;
 };
 
-module.exports = { insertPost, getAllPosts, getPostInfosById };
+const updatePostById = async (id, title, content, userId) => {
+  const doesPostExist = await getPostById(id);
+
+  if (doesPostExist === null) return null;
+
+  if (userId !== doesPostExist.userId) return 'Unauthorized user';
+
+  await BlogPost.update({ title, content }, { where: { id } });
+
+  const postUpdated = await getPostInfosById(id);
+
+  return postUpdated;
+};
+
+module.exports = { insertPost, getAllPosts, getPostInfosById, updatePostById };

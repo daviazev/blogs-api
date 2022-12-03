@@ -3,6 +3,7 @@ const {
   createUserValidation, 
   createCategoryValidation,
   postValidation,
+  postUpdateValidation
 } = require('./schema');
 
 const validateLoginField = (email, password) => {
@@ -38,9 +39,18 @@ const validatePost = (title, content, categoryIds) => {
   return { type: null, messsage: '' };
 };
 
+const validateUpdatePost = (title, content) => {
+  const { error } = postUpdateValidation.validate({ title, content });
+
+  if (error) return { type: error.message, message: 'Some required fields are missing' };
+
+  return { type: null, messsage: '' };
+};
+
 module.exports = {
   validateLoginField,
   validateCreateUser,
   validateCreateCategory,
   validatePost,
+  validateUpdatePost,
 };
