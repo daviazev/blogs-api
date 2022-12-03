@@ -3,7 +3,7 @@ const {
   createUserValidation, 
   createCategoryValidation,
   postValidation,
-  postUpdateValidation
+  postUpdateValidation,
 } = require('./schema');
 
 const validateLoginField = (email, password) => {

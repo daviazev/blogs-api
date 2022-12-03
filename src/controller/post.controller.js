@@ -56,4 +56,29 @@ const controllerUpdatePost = async (req, res) => {
   }
 };
 
-module.exports = { controllerPost, controllerGetAllPosts, getPostInfosById, controllerUpdatePost };
+const controllerDeletePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { dataValues } = req.user;
+
+    const result = await postService.deletePostById(id, dataValues.id);
+
+    if (result === null) return res.status(404).json({ message: 'Post does not exist' });
+
+    if (result === 'Unauthorized user') {
+      return res.status(401).json({ message: 'Unauthorized user' });
+    }
+
+    return res.status(204).json();
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro interno', erro: error.message });
+  }
+};
+
+module.exports = { 
+  controllerPost,
+  controllerGetAllPosts,
+  getPostInfosById,
+  controllerUpdatePost,
+  controllerDeletePost,
+ };

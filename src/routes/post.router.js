@@ -20,4 +20,6 @@ router.get('/:id', validateJWT, postController.getPostInfosById);
 
 router.put('/:id', validateJWT, validateUpdate, postController.controllerUpdatePost);
 
+router.delete('/:id', validateJWT, postController.controllerDeletePost);
+
 module.exports = router;
