@@ -9,7 +9,6 @@ const createUser = async (req, res) => {
     const { displayName, email, password, image } = req.body;
 
     const userCreated = await userService.createUser({ displayName, email, password, image });
-    console.log('>>>>>>>>>>>>', userCreated.null);
 
     const jwtConfig = {
         expiresIn: '7d',
@@ -45,7 +44,6 @@ const controllerGetUserById = async (req, res) => {
 };
 
 const controllerDeleteUserById = async (req, res) => {
-  console.log(req.user);
   try {
     const { dataValues } = req.user;
     await userService.deleteUserById(dataValues.id);

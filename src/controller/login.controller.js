@@ -23,7 +23,6 @@ const login = async (req, res) => {
 
     return res.status(200).json({ token });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ message: 'Erro interno' });
   }
 };
