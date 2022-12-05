@@ -4,8 +4,9 @@ const { BlogPost, User, PostCategory, Category } = require('../models');
 const config = require('../config/config');
 
 const env = process.env.NODE_ENV || 'development';
-// Ajustamos para usar a configuração correta para nosso ambiente
 const sequelize = new Sequelize(config[env]);
+
+const { Op } = Sequelize;
 
 const getPostById = async (id) => {
   const createdPost = await BlogPost.findOne({ where: { id } });  
@@ -86,10 +87,27 @@ const deletePostById = async (id, userId) => {
   return '';
 };
 
+// https://stackoverflow.com/questions/20695062/sequelize-or-condition-object
+// https://stackoverflow.com/questions/53971268/node-sequelize-find-where-like-wildcard
+const getPostByQuery = async (query) => {
+  const queries = await BlogPost.findAll({
+    where: {
+      [Op.or]: [{ title: { [Op.like]: `%${query}%` } }, { content: { [Op.like]: `%${query}%` } }],
+    },
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+
+  return queries;
+};
+
 module.exports = { 
   insertPost,
   getAllPosts,
   getPostInfosById,
   updatePostById,
   deletePostById,
+  getPostByQuery,
  };

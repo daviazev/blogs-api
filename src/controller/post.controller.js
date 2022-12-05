@@ -1,5 +1,7 @@
 const { postService } = require('../service');
 
+const erro500 = 'Erro interno';
+
 const controllerPost = async (req, res) => {
   try {
     const { title, content, categoryIds } = req.body;
@@ -19,7 +21,7 @@ const controllerGetAllPosts = async (_req, res) => {
 
     return res.status(200).json(result);
   } catch (error) {
-    return res.status(500).json({ message: 'Erro interno' });
+    return res.status(500).json({ message: erro500 });
   }
 };
 
@@ -32,7 +34,7 @@ const getPostInfosById = async (req, res) => {
 
     return res.status(200).json(result);
   } catch (error) {
-    return res.status(500).json({ message: 'Erro interno' });
+    return res.status(500).json({ message: erro500 });
   }
 };
 
@@ -52,7 +54,7 @@ const controllerUpdatePost = async (req, res) => {
 
     res.status(200).json(result);
   } catch (error) {
-    res.status(200).json({ message: 'Erro interno', erro: error.message });
+    res.status(200).json({ message: erro500, erro: error.message });
   }
 };
 
@@ -71,7 +73,17 @@ const controllerDeletePost = async (req, res) => {
 
     return res.status(204).json();
   } catch (error) {
-    return res.status(500).json({ message: 'Erro interno', erro: error.message });
+    return res.status(500).json({ message: erro500, erro: error.message });
+  }
+};
+
+const controllerGetPostByQuery = async (req, res) => {
+  try {
+    const { q } = req.query;
+    const result = await postService.getPostByQuery(q);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: erro500, erro: error.message });
   }
 };
 
@@ -81,4 +93,5 @@ module.exports = {
   getPostInfosById,
   controllerUpdatePost,
   controllerDeletePost,
+  controllerGetPostByQuery,
  };

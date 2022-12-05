@@ -12,6 +12,8 @@ const router = express.Router();
 
 router.use(express.json());
 
+router.get('/search', validateJWT, postController.controllerGetPostByQuery);
+
 router.post('/', validateJWT, verifyPostFields, allCategoriesExists, postController.controllerPost);
 
 router.get('/', validateJWT, postController.controllerGetAllPosts);
