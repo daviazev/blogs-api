@@ -44,8 +44,21 @@ const controllerGetUserById = async (req, res) => {
   }
 };
 
+const controllerDeleteUserById = async (req, res) => {
+  console.log(req.user);
+  try {
+    const { dataValues } = req.user;
+    await userService.deleteUserById(dataValues.id);
+
+    return res.status(204).json();
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro interno' });
+  }
+};
+
 module.exports = {
   createUser,
   controllerGetAllusers,
   controllerGetUserById,
+  controllerDeleteUserById,
 };
