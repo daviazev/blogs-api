@@ -1,5 +1,7 @@
 # Blogs API
 
+![Print da tela do projeto na plataforma da Trybe](./print.png)
+
 ## Sobre
 
 Store Manager é um projeto desenvolvido durante o módulo de backend no curso da Trybe. O objetivo é criar uma API para um blog usando o ORM Sequelize.
