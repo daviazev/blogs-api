@@ -2,8 +2,6 @@
 
 [Leia em Português](#português-) | [Read in English](#english-)
 
-![Print da tela do projeto na plataforma da Trybe](./print.png)
-
 ---
 
 ## Português 🇧🇷
